@@ -65,6 +65,12 @@ public class MainController {
         return p;
     }
 
+    @GetMapping("/addPerson/{id}")
+    @ResponseBody
+    Person addPersonPathVariable(Person p) {
+        return p;
+    }
+
     @AllArgsConstructor
     @Getter
     static class Person {
