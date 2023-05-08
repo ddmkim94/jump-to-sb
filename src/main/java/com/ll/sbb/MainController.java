@@ -1,5 +1,7 @@
 package com.ll.sbb;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,4 +50,26 @@ public class MainController {
 
         return "세션변수 %s의 값이 %s 입니다.".formatted(name, value);
     }
+
+    @GetMapping("addPersonOldWay")
+    @ResponseBody
+    Person addPersonOldWay(int id, int age, String name) {
+        Person p = new Person(id, age, name);
+
+        return p;
+    }
+
+    @GetMapping("addPerson")
+    @ResponseBody
+    Person addPerson(Person p) {
+        return p;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    static class Person {
+        private int id;
+        private int age;
+        private String name;
+    };
 }
