@@ -71,4 +71,16 @@ class SbbApplicationTests {
         q.setSubject("제목 수정해보기");
         questionRepository.save(q);
     }
+
+    @Test
+    void testJpa7() {
+        assertThat(questionRepository.count()).isEqualTo(2);
+        Optional<Question> oq = questionRepository.findById(1);
+        assertThat(oq).isPresent();
+
+        Question q = oq.get();
+
+        questionRepository.delete(q);
+        assertThat(questionRepository.count()).isEqualTo(1);
+    }
 }
