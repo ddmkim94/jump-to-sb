@@ -1,5 +1,7 @@
 package com.ll.sbb;
 
+import com.ll.sbb.question.Question;
+import com.ll.sbb.question.QuestionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
