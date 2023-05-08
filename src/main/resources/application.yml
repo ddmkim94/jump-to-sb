@@ -1,4 +1,5 @@
 spring:
+  # DATABASE
   h2:
     console:
       enabled: true # 웹에서 제공하는 h2 콘솔 사용하겠다.
@@ -8,3 +9,10 @@ spring:
     driver-class-name: org.h2.Driver
     username: sa
     password:
+
+  # JPA
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    ddl-auto: create
