@@ -1,0 +1,10 @@
+spring:
+  h2:
+    console:
+      enabled: true # 웹에서 제공하는 h2 콘솔 사용하겠다.
+      path: /h2-console # h2 콘솔 접속 url
+  datasource:
+    url: jdbc:h2:~/local;MODE=MYSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
