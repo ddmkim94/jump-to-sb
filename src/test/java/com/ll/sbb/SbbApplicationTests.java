@@ -43,7 +43,6 @@ class SbbApplicationTests {
     @Test
     void testJpa3() {
         Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
-
         assertThat(q.getId()).isEqualTo(1);
     }
 
@@ -51,7 +50,13 @@ class SbbApplicationTests {
     @Test
     void testJpa4() {
         Question q = questionRepository.findBySubjectAndContent("sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다.");
-
         assertThat(q.getId()).isEqualTo(1);
+    }
+
+
+    @Test
+    void testJpa5() {
+        List<Question> list = questionRepository.findBySubjectLike("%sbb%");
+        assertThat(list.size()).isEqualTo(1);
     }
 }
