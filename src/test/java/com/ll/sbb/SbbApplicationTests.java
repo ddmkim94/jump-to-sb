@@ -47,4 +47,11 @@ class SbbApplicationTests {
         assertThat(q.getId()).isEqualTo(1);
     }
 
+
+    @Test
+    void testJpa4() {
+        Question q = questionRepository.findBySubjectAndContent("sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다.");
+
+        assertThat(q.getId()).isEqualTo(1);
+    }
 }
