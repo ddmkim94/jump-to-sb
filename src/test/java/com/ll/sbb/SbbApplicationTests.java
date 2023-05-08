@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,5 +59,16 @@ class SbbApplicationTests {
     void testJpa5() {
         List<Question> list = questionRepository.findBySubjectLike("%sbb%");
         assertThat(list.size()).isEqualTo(1);
+    }
+
+    @Test
+    void testJpa6() {
+        Optional<Question> oq = questionRepository.findById(1);
+
+        assertThat(oq).isPresent();
+        Question q = oq.get();
+
+        q.setSubject("제목 수정해보기");
+        questionRepository.save(q);
     }
 }
