@@ -19,7 +19,7 @@
     <tr th:each="question : ${questionList}">
         <td th:text="|${question.id}번|"></td>
         <td th:text="${question.subject}"></td>
-        <td th:text="${question.createDate}"></td>
+        <td th:text="${#strings.replace(#strings.substring(question.createDate, 2, 16), 'T', ' ')}"></td>
     </tr>
     </tbody>
 </table>
