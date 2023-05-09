@@ -18,7 +18,9 @@
     <tbody>
     <tr th:each="question : ${questionList}">
         <td th:text="|${question.id}번|"></td>
-        <td th:text="${question.subject}"></td>
+        <td>
+            <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+        </td>
         <td th:text="${#strings.replace(#strings.substring(question.createDate, 2, 16), 'T', ' ')}"></td>
     </tr>
     </tbody>
