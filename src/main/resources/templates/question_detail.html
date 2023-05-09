@@ -9,6 +9,11 @@
     <h1 th:text="|제목 : ${question.subject}|"></h1>
     <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
     <div th:text="|내용 : ${question.content}|"></div>
+
+    <form method="post" th:action="@{|/answer/create/${question.id}|}">
+        <textarea name="content" rows="15" required></textarea>
+        <button type="submit">답변 등록</button>
+    </form>
 </table>
 </body>
 </html>
