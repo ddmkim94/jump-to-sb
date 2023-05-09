@@ -5,16 +5,19 @@
     <title>title</title>
 </head>
 <body>
+<!-- Emmet -> table>h1+thead>tr>th*2^^tbody>tr>td*2 -->
 <table>
     <h1>질문 목록!</h1>
     <thead>
-    <tr>
-        <th>제목</th>
-        <th>작성일시</th>
-    </tr>
+        <tr>
+            <th>#</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
     </thead>
     <tbody>
     <tr th:each="question : ${questionList}">
+        <td th:text="|${question.id}번|"></td>
         <td th:text="${question.subject}"></td>
         <td th:text="${question.createDate}"></td>
     </tr>

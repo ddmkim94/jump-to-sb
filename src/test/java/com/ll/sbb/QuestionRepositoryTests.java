@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -113,6 +114,7 @@ public class QuestionRepositoryTests {
 
     @Test
     @DisplayName("LIKE 연산자와 제목으로 question을 조회할 수 있다.")
+    @Rollback(false)
     void findBySubjectLike__Test() {
         List<Question> questionList = questionRepository.findBySubjectLike("sbb%");
 
