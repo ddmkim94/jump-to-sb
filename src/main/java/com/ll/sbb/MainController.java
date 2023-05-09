@@ -17,6 +17,12 @@ import java.util.stream.IntStream;
 @Controller
 public class MainController {
 
+    @GetMapping("/")
+    public String root() {
+        // QuestionController 의 /question/list 으로 리다이렉트!
+        return "redirect:/question/list";
+    }
+
     @GetMapping("/sbb")
     @ResponseBody
     public String index() {
