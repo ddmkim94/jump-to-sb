@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.zip.DataFormatException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,12 +19,7 @@ public class QuestionService {
     }
 
     public Question getQuestion(Integer id) {
-        Optional<Question> oq = questionRepository.findById(id);
-
-        if (oq.isPresent()) {
-            return oq.get();
-        }
-
-        throw new DataNotFoundException("question not found!");
+        return questionRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException("%d번 게시글 not found!".formatted(id)));
     }
 }
