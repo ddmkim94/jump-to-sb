@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class QuestionController {
 
     @GetMapping("/list")
-    @ResponseBody
     public String list() {
-        return "question list";
+        return "question_list";
     }
 }
