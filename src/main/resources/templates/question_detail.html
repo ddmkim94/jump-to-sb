@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>title</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-<table>
-    <h1 th:text="|제목 : ${question.subject}|"></h1>
-    <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
-    <div th:text="|내용 : ${question.content}|"></div>
-
-    <h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
-    <div>
-        <ul>
-            <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
-        </ul>
+<div class="container my-3">
+    <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;" th:text="${question.content}"></div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <form method="post" th:action="@{|/answer/create/${question.id}|}">
-        <textarea name="content" rows="15" required></textarea>
-        <button type="submit">답변 등록</button>
+    <!-- 답변 개수 표시    -->
+    <h5 class="border-bottom my-3 py-2" th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+    <div class="card my-3" th:each="answer : ${question.answerList}">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
+            <div class="d-flex justify-content-end">
+                <div class="badge bg-light text-dark p-2 text-start">
+                    <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form th:action="@{|/answer/create/${question.id}|}" method="post" class="my-3">
+        <textarea name="content" rows="15" class="form-control"></textarea>
+        <button type="submit" class="btn btn-primary my-2">답변 등록</button>
     </form>
-</table>
+</div>
 </body>
 </html>
