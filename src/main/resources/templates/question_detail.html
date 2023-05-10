@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>title</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-</head>
-<body>
-<div class="container my-3">
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
     <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
     <div class="card my-3">
         <div class="card-body">
@@ -38,5 +30,4 @@
         <button type="submit" class="btn btn-primary my-2">답변 등록</button>
     </form>
 </div>
-</body>
 </html>
