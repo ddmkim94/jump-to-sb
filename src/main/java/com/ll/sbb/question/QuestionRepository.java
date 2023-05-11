@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
+
+    List<Question> findAllByOrderByIdDesc();
     Question findBySubject(String subject);
 
     Question findBySubjectAndContent(String subject, String content);

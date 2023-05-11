@@ -1,8 +1,4 @@
 <html layout:decorate="~{layout}">
-<head>
-    <!-- 특정 페이지에만 필요한 css, js가 있는 경우에는 <head> 엘리먼트 안에 작성해주면 됨.   -->
-    <link rel="stylesheet" th:href="@{/css/detail.css}">
-</head>
 <div layout:fragment="content" class="container my-3">
     <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
     <div class="card my-3">
