@@ -8,20 +8,26 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
     <!-- sbb CSS 아래 있는게 우선 순위가 더 높음 -->
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <script defer th:src="@{/js/bootstrap.min.js}"></script>
     <title>Hello, sbb!</title>
 </head>
 <body>
-<header>
-    <div class="container py-3 d-flex">
-        <a th:href="@{/}" class="mr-auto">메인 페이지</a>
-
-        <div class="flex-grow-1"></div>
-
-        <div>
-            <a th:href="@{/question/list}">질문 리스트</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">SBB</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">로그인</a>
+                </li>
+            </ul>
         </div>
     </div>
-</header>
+</nav>
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 <main>
     <th:block layout:fragment="content"></th:block>
