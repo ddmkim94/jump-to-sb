@@ -10,8 +10,8 @@
             </tr>
         </thead>
         <tbody class="table-primary">
-        <tr th:each="page : ${paging}">
-            <td th:text="${page.id}"></td>
+        <tr th:each="page, loop : ${paging}">
+            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td>
                 <a th:href="@{|/question/detail/${page.id}|}" th:text="${page.subject}"></a>
             </td>
