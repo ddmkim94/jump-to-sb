@@ -21,6 +21,10 @@ main {
     flex-grow: 1;
 }
 
+a {
+    text-decoration: none;
+}
+
 footer {
     height: 70px;
 }
