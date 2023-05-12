@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +29,7 @@ public class QuestionRepositoryTests {
         createSampleData();
     }
 
-    private void createSampleData() {
+    private void createSampleData(QuestionRepository questionRepository) {
         Question q1 = new Question();
         q1.setSubject("sbb가 무엇인가요?");
         q1.setContent("sbb에 대해서 알고 싶습니다.");
@@ -42,6 +43,10 @@ public class QuestionRepositoryTests {
         questionRepository.save(q2);
     }
 
+    private void createSampleData() {
+        createSampleData(questionRepository);
+    }
+
     private void clearData() {
         questionRepository.disableForeignKeyChecks();
         questionRepository.truncate();
@@ -50,6 +55,7 @@ public class QuestionRepositoryTests {
 
     @Test
     @DisplayName("question 저장이 성공해야 한다.")
+    @Rollback(false)
     void saveQuestion__Test() {
         Question q1 = new Question();
         q1.setSubject("sbb가 무엇인가요?");
@@ -64,7 +70,7 @@ public class QuestionRepositoryTests {
         questionRepository.save(q2);
 
         List<Question> all = questionRepository.findAll();
-        assertThat(all.size()).isEqualTo(4);
+        assertThat(all.size()).isEqualTo(302);
     }
 
     @Test
@@ -121,5 +127,21 @@ public class QuestionRepositoryTests {
         assertThat(questionList.size()).isEqualTo(1);
         assertThat(questionList.get(0).getSubject()).isEqualTo("sbb가 무엇인가요?");
         assertThat(questionList.get(0).getContent()).isEqualTo("sbb에 대해서 알고 싶습니다.");
+    }
+
+    @Test
+    @Rollback(false)
+    void createManySampleData() {
+        boolean run = true;
+
+        if (run == false) return;
+
+        IntStream.rangeClosed(3, 300).forEach(id -> {
+            Question q = new Question();
+            q.setSubject("%d번 질문".formatted(id));
+            q.setContent("%d번 질문의 내용".formatted(id));
+            q.setCreateDate(LocalDateTime.now());
+            questionRepository.save(q);
+        });
     }
 }

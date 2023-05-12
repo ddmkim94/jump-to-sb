@@ -10,15 +10,35 @@
             </tr>
         </thead>
         <tbody class="table-primary">
-        <tr th:each="question : ${questionList}">
-            <td th:text="${question.id}"></td>
+        <tr th:each="page : ${paging}">
+            <td th:text="${page.id}"></td>
             <td>
-                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+                <a th:href="@{|/question/detail/${page.id}|}" th:text="${page.subject}"></a>
             </td>
-            <td th:text="${#strings.replace(#strings.substring(question.createDate, 2, 16), 'T', ' ')}"></td>
+            <td th:text="${#strings.replace(#strings.substring(page.createDate, 2, 16), 'T', ' ')}"></td>
         </tr>
         </tbody>
     </table>
+    <!--  페이징 번호  -->
+    <div th:if="${!paging.isEmpty()}">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${!paging.hasPrevious()} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{|?page=${paging.number - 1}|}">Prev</a>
+            </li>
+
+            <li th:each="page : ${#numbers.sequence(0, paging.totalPages - 1)}"
+                th:if="${page >= paging.number - 5 && page <= paging.number + 5}"
+                th:classappend="${page == paging.number} ? 'active'"
+                class="page-item">
+                <a th:href="@{|?page=${page}|}" th:text="${page + 1}" class="page-link"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${!paging.hasNext()} ? 'disabled'">
+                <a class="page-link" th:href="@{|?page=${paging.number + 1}|}">Next</a>
+            </li>
+        </ul>
+    </div>
     <a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
 </div>
 </html>
