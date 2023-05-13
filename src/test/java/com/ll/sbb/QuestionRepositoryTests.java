@@ -78,7 +78,7 @@ public class QuestionRepositoryTests {
     void deleteQuestion__Test() {
         assertThat(questionRepository.count()).isEqualTo(2L);
 
-        Question question = questionRepository.findById(1).get();
+        Question question = questionRepository.findById(1L).get();
         questionRepository.delete(question);
 
         assertThat(questionRepository.count()).isEqualTo(1L);
@@ -88,7 +88,7 @@ public class QuestionRepositoryTests {
     @Test
     @DisplayName("question 수정이 성공해야 한다.")
     void updateQuestion__Test() {
-        Question question = questionRepository.findById(1).get();
+        Question question = questionRepository.findById(1L).get();
         question.setSubject("제목 변경!");
         question.setContent("내용도 변경");
 
