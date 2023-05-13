@@ -31,7 +31,7 @@ public class QuestionService {
         return questionRepository.findAllByOrderByIdDesc();
     }
 
-    public Question getQuestion(Integer id) {
+    public Question getQuestion(Long id) {
         return questionRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException("%d번 게시글 not found!".formatted(id)));
     }

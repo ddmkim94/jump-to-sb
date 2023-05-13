@@ -3,11 +3,13 @@ package com.ll.sbb.question;
 import com.ll.sbb.answer.AnswerForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -36,11 +38,12 @@ public class QuestionController {
     @ResponseBody
     public Page<Question> responseList(@RequestParam(value = "page", defaultValue ="0") int page) {
         Page<Question> questionList = questionService.getList(page);
+
         return questionList;
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable int id, AnswerForm answerForm) {
+    public String detail(Model model, @PathVariable Long id, AnswerForm answerForm) {
         Question question = questionService.getQuestion(id);
         model.addAttribute("question", question);
 

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface QuestionRepository extends JpaRepository<Question, Integer> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     Page<Question> findAllByOrderByIdDesc(Pageable pageable);
     List<Question> findAllByOrderByIdDesc();
