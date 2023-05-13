@@ -14,6 +14,10 @@
             <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
             <td>
                 <a th:href="@{|/question/detail/${page.id}|}" th:text="${page.subject}"></a>
+                <span class="text-danger small ms-2"
+                      th:if="${#lists.size(page.answerList) > 0}"
+                      th:text="|[${#lists.size(page.answerList)}]|">
+                </span>
             </td>
             <td th:text="${#strings.replace(#strings.substring(page.createDate, 2, 16), 'T', ' ')}"></td>
         </tr>
