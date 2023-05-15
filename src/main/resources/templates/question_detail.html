@@ -5,11 +5,15 @@
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;" th:text="${question.content}"></div>
             <div class="d-flex justify-content-end">
+                <div th:if="${question.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div th:text="${#temporals.format(question.modifyDate, 'yyyy년 MM월 dd일 a h시 mm분')}"></div>
+                </div>
                 <div class="badge bg-light text-dark p-2 text-start">
                     <div class="mb-2">
                         <span th:text="${question.author?.username}"></span>
                     </div>
-                    <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
+                    <div th:text="${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}"></div>
                 </div>
             </div>
             <div class="d-flex">
@@ -35,11 +39,15 @@
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
             <div class="d-flex justify-content-end">
+                <div th:if="${answer.modifyDate != null}" class="badge bg-light text-dark p-2 text-start mx-3">
+                    <div class="mb-2">modified at</div>
+                    <div th:text="${#temporals.format(answer.modifyDate, 'yyyy년 MM월 dd일 a h시 mm분')}"></div>
+                </div>
                 <div class="badge bg-light text-dark p-2 text-start">
                     <div class="mb-2">
                         <span th:text="${answer.author?.username}"></span>
                     </div>
-                    <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
+                    <div th:text="${#temporals.format(answer.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}"></div>
                 </div>
             </div>
             <div class="d-flex">
