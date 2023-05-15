@@ -22,13 +22,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeRequests()
-                .requestMatchers(new AntPathRequestMatcher("/**"))
-                .permitAll()
+                    .authorizeRequests()
+                    .requestMatchers(new AntPathRequestMatcher("/**"))
+                    .permitAll()
                 .and()
-                .formLogin()
-                .loginPage("/user/login")
-                .defaultSuccessUrl("/")
+                    .formLogin()
+                    .loginPage("/user/login")
+                    .defaultSuccessUrl("/")
+                .and()
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+                    .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true)
                 .and()
                 .build();
     }
