@@ -12,6 +12,12 @@
                     <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
                 </div>
             </div>
+            <div class="my-3">
+                <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-primary"
+                   sec:authorize="isAuthenticated()"
+                   th:if="${question.author != null && #authentication.principal.username == question.author.username}"
+                   th:text="수정"></a>
+            </div>
         </div>
     </div>
 

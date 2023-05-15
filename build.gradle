@@ -24,8 +24,10 @@ dependencies {
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5' // 타임리프에서 시큐리티 관련 유틸리티 제공
+
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
     compileOnly 'org.projectlombok:lombok'
