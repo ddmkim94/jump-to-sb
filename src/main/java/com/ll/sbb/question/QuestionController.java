@@ -33,6 +33,16 @@ public class QuestionController {
     private final QuestionService questionService;
     private final UserService userService;
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String questionVote(Principal principal, @PathVariable Long id) {
+        Question question = questionService.getQuestion(id);
+        SiteUser siteUser = userService.getUser(principal.getName());
+
+        questionService.vote(question, siteUser);
+        return "redirect:/question/detail/%d".formatted(id);
+    }
+
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue ="0") int page) {
         Page<Question> paging = questionService.getList(page);
