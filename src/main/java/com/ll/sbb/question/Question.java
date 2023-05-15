@@ -34,6 +34,7 @@ public class Question {
     private List<Answer> answerList = new ArrayList<>();
 
     private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
     public void addAnswer(Answer answer) {
         this.answerList.add(answer);
