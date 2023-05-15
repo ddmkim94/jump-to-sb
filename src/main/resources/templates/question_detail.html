@@ -6,6 +6,9 @@
             <div class="card-text" style="white-space: pre-line;" th:text="${question.content}"></div>
             <div class="d-flex justify-content-end">
                 <div class="badge bg-light text-dark p-2 text-start">
+                    <div class="mb-2">
+                        <span th:text="${question.author?.username}"></span>
+                    </div>
                     <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
                 </div>
             </div>
