@@ -16,9 +16,17 @@ public class UserService {
         SiteUser user = new SiteUser();
         user.setUsername(username);
         user.setEmail(email);
-
         user.setPassword(passwordEncoder.encode(password));
-        this.userRepository.save(user);
+
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            if (userRepository.existsByUsername(username)) {
+                throw new SignupUsernameDuplicatedException("이미 사용중인 username 입니다.");
+            } else {
+                throw new SignupEmailDuplicatedException("이미 사용중인 email 입니다.");
+            }
+        }
         return user;
     }
 }
