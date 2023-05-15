@@ -12,11 +12,19 @@
                     <div th:text="|날짜 : ${#temporals.format(question.createDate, 'yyyy년 MM월 dd일 a h시 mm분')}|"></div>
                 </div>
             </div>
-            <div class="my-3">
-                <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-lg btn-primary"
-                   sec:authorize="isAuthenticated()"
-                   th:if="${question.author != null && #authentication.principal.username == question.author.username}"
-                   th:text="수정"></a>
+            <div class="d-flex">
+                <div class="my-3 me-2">
+                    <a th:href="@{|/question/modify/${question.id}|}" class="btn btn-lg btn-outline-secondary"
+                       sec:authorize="isAuthenticated()"
+                       th:if="${question.author != null && #authentication.principal.username == question.author.username}"
+                       th:text="수정"></a>
+                </div>
+                <div class="my-3">
+                    <a onclick="if ( !confirm('정말로 삭제하시겠습니까?') ) return false;" th:href="@{|/question/delete/${question.id}|}"
+                       class="btn btn-lg btn-outline-secondary" sec:authorize="isAuthenticated()"
+                       th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+                       th:text="삭제"></a>
+                </div>
             </div>
         </div>
     </div>
@@ -39,8 +47,9 @@
 
     <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-        <textarea sec:authorize="isAnonymous()" th:field="*{content}" rows="2" disabled class="form-control"></textarea>
-        <textarea sec:authorize="isAuthenticated()" th:field="*{content}" rows="2" class="form-control"></textarea>
+        <h3>:) 댓글 쓰기</h3>
+        <textarea sec:authorize="isAnonymous()" th:field="*{content}" rows="5" disabled class="form-control"></textarea>
+        <textarea sec:authorize="isAuthenticated()" th:field="*{content}" rows="5" class="form-control"></textarea>
 
         <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-primary my-2">답변 등록</button>
         <button type="submit" sec:authorize="isAnonymous()" disabled class="btn btn-primary my-2">답변 등록</button>

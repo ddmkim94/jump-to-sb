@@ -115,4 +115,21 @@ public class QuestionController {
         questionService.modify(question, questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/detail/%d".formatted(id);
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String delete(Principal principal, @PathVariable Long id) {
+        Question question = questionService.getQuestion(id);
+
+        if (question == null) {
+            throw new DataNotFoundException("%d 질문은 존재하지 않습니다.".formatted(id));
+        }
+
+        if (!question.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.");
+        }
+
+        questionService.delete(question);
+        return "redirect:/";
+    }
 }
