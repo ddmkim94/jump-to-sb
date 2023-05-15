@@ -27,8 +27,11 @@
 
     <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
         <div th:replace="~{form_errors :: formErrorsFragment}"></div>
-        <textarea th:field="*{content}" rows="2" class="form-control border border-success border-3"></textarea>
-        <button type="submit" class="btn btn-primary my-2">답변 등록</button>
+        <textarea sec:authorize="isAnonymous()" th:field="*{content}" rows="2" disabled class="form-control border border-success border-3"></textarea>
+        <textarea sec:authorize="isAuthenticated()" th:field="*{content}" rows="2" class="form-control border border-success border-3"></textarea>
+
+        <button type="submit" sec:authorize="isAuthenticated()" class="btn btn-primary my-2">답변 등록</button>
+        <button type="submit" sec:authorize="isAnonymous()" disabled class="btn btn-primary my-2">답변 등록</button>
     </form>
 </div>
 </html>
