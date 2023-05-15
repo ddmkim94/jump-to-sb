@@ -1,13 +1,11 @@
 package com.ll.sbb.user;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import lombok.RequiredArgsConstructor;
 
 import javax.validation.Valid;
 
@@ -17,6 +15,11 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping("/login")
+    public String login() {
+        return "login_form";
+    }
 
     @GetMapping("/signup")
     public String signup(UserCreateForm userCreateForm) {
