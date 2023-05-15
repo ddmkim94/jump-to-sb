@@ -1,9 +1,12 @@
 package com.ll.sbb.question;
 
 import com.ll.sbb.answer.AnswerForm;
+import com.ll.sbb.user.SiteUser;
+import com.ll.sbb.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/question")
@@ -26,6 +30,7 @@ import javax.validation.Valid;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final UserService userService;
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue ="0") int page) {
@@ -50,17 +55,21 @@ public class QuestionController {
         return "question_detail";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
-    public String create(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+    public String create(Principal principal, @Valid QuestionForm questionForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "question_form";
         }
-        Question question = questionService.create(questionForm.getSubject(), questionForm.getContent());
+
+        SiteUser siteUser = userService.getUser(principal.getName());
+        Question question = questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
 
         return "redirect:/question/detail/%d".formatted(question.getId());
     }

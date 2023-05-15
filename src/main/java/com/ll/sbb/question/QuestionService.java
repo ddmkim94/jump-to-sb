@@ -1,6 +1,7 @@
 package com.ll.sbb.question;
 
 import com.ll.sbb.exception.DataNotFoundException;
+import com.ll.sbb.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,10 +37,11 @@ public class QuestionService {
                 .orElseThrow(() -> new DataNotFoundException("%d번 게시글 not found!".formatted(id)));
     }
 
-    public Question create(String subject, String content) {
+    public Question create(String subject, String content, SiteUser author) {
         Question question = new Question();
         question.setSubject(subject);
         question.setContent(content);
+        question.setAuthor(author);
         question.setCreateDate(LocalDateTime.now());
 
         return questionRepository.save(question);
