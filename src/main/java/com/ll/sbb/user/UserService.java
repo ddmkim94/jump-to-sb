@@ -1,7 +1,9 @@
 package com.ll.sbb.user;
 
 
+import com.ll.sbb.exception.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,10 @@ public class UserService {
             }
         }
         return user;
+    }
+
+    public SiteUser getUser(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() ->
+                new DataNotFoundException("사용자를 찾을 수 없습니다."));
     }
 }
