@@ -1,6 +1,7 @@
 package com.ll.sbb.question;
 
 import com.ll.sbb.answer.Answer;
+import com.ll.sbb.user.SiteUser;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,9 @@ public class Question {
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
     private Long id;
+
+    @ManyToOne
+    private SiteUser author;
 
     @Column(length = 200)
     private String subject;
