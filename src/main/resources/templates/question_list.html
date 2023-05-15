@@ -1,25 +1,27 @@
 <html layout:decorate="~{layout}">
 <div layout:fragment="content" class="container my-3">
-    <table class="table">
+    <table class="table text-center">
         <h1>질문 목록!</h1>
         [[${#authentication}]]
         <thead class="table-danger">
             <tr>
                 <th>번호</th>
-                <th>제목</th>
+                <th style="width:30%">제목</th>
+                <th>글쓴이</th>
                 <th>작성일시</th>
             </tr>
         </thead>
         <tbody class="table-primary">
         <tr th:each="page, loop : ${paging}">
             <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-            <td>
+            <td class="text-start">
                 <a th:href="@{|/question/detail/${page.id}|}" th:text="${page.subject}"></a>
                 <span class="text-danger small ms-2"
                       th:if="${#lists.size(page.answerList) > 0}"
                       th:text="|[${#lists.size(page.answerList)}]|">
                 </span>
             </td>
+            <td><span th:text="${page.author?.username}"></span></td>
             <td th:text="${#strings.replace(#strings.substring(page.createDate, 2, 16), 'T', ' ')}"></td>
         </tr>
         </tbody>
