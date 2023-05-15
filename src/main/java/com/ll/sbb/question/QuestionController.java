@@ -97,4 +97,22 @@ public class QuestionController {
         System.out.println(questionForm.getContent());
         return "question_form";
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{id}")
+    public String modify(@PathVariable Long id, Principal principal, @Valid QuestionForm questionForm, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+
+        Question question = questionService.getQuestion(id);
+
+        if(!question.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+
+        questionService.modify(question, questionForm.getSubject(), questionForm.getContent());
+        return "redirect:/question/detail/%d".formatted(id);
+    }
 }
