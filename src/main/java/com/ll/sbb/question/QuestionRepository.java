@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
 
+    Page<Question> findBySubjectContains(String kw, Pageable pageable);
     Page<Question> findAllByOrderByIdDesc(Pageable pageable);
     List<Question> findAllByOrderByIdDesc();
     Question findBySubject(String subject);
@@ -33,4 +34,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Modifying
     @Query(value = "SET FOREIGN_KEY_CHECKS = 1", nativeQuery = true)
     void enableForeignKeyChecks();
+
+
 }
