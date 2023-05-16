@@ -19,10 +19,13 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
-    public Page<Question> getList(int page, String kw) {
+    public Page<Question> getList(int page, String kw, String sortCode) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
-        sorts.add(Sort.Order.desc("id"));
+
+        switch (sortCode) {
+            case "OLD" -> sorts.add(Sort.Order.asc("id")); // 오래된순
+            case "NEW" -> sorts.add(Sort.Order.desc("id")); // 최신순
+        }
 
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
         return questionRepository.findDistinctBySubjectContainsOrContentContainsOrAuthor_UsernameOrAnswerList_ContentContainsOrAnswerList_Author_Username(kw, kw, kw, kw, kw, pageable);
