@@ -47,7 +47,7 @@ public class QuestionController {
     public String list(Model model,
                        @RequestParam(value = "page", defaultValue ="0") int page,
                        @RequestParam(defaultValue = "") String kw,
-                       @RequestParam String sortCode
+                       @RequestParam(defaultValue = "") String sortCode
                        ) {
         Page<Question> paging = questionService.getList(page, kw, sortCode);
         model.addAttribute("paging", paging);
