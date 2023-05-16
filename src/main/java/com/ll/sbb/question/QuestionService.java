@@ -25,7 +25,7 @@ public class QuestionService {
         sorts.add(Sort.Order.desc("id"));
 
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        return questionRepository.findBySubjectContains(kw, pageable);
+        return questionRepository.findBySubjectContainsOrContentContains(kw, kw, pageable);
     }
 
     public List<Question> getList() {
