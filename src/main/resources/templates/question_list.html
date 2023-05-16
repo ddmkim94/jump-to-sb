@@ -46,18 +46,18 @@
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${!paging.hasPrevious()} ? 'disabled'">
                 <a class="page-link"
-                   th:href="@{|?page=${paging.number - 1}&kw=${kw}|}">Prev</a>
+                   th:href="@{|?page=${paging.number - 1}&kw=${kw}&sortCode=${sortCode}|}">Prev</a>
             </li>
 
             <li th:each="page : ${#numbers.sequence(0, paging.totalPages - 1)}"
                 th:if="${page >= paging.number - 5 && page <= paging.number + 5}"
                 th:classappend="${page == paging.number} ? 'active'"
                 class="page-item">
-                <a th:href="@{|?page=${page}&kw=${kw}|}" th:text="${page + 1}" class="page-link"></a>
+                <a th:href="@{|?page=${page}&kw=${kw}&sortCode=${sortCode}|}" th:text="${page + 1}" class="page-link"></a>
             </li>
 
             <li class="page-item" th:classappend="${!paging.hasNext()} ? 'disabled'">
-                <a class="page-link" th:href="@{|?page=${paging.number + 1}&kw=${kw}|}">Next</a>
+                <a class="page-link" th:href="@{|?page=${paging.number + 1}&kw=${kw}&sortCode=${sortCode}|}">Next</a>
             </li>
         </ul>
     </div>
