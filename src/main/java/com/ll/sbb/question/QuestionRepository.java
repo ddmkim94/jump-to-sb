@@ -16,6 +16,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     Page<Question> findBySubjectContainsOrContentContainsOrAuthor_Username(String kw, String kw_, String kw__, Pageable pageable);
     Page<Question> findDistinctBySubjectContainsOrContentContainsOrAuthor_UsernameOrAnswerList_ContentContains(String kw, String kw_, String kw__, String kw___, Pageable pageable);
+    Page<Question> findDistinctBySubjectContainsOrContentContainsOrAuthor_UsernameOrAnswerList_ContentContainsOrAnswerList_Author_Username(String kw, String kw_, String kw__, String kw___, String kw_____, Pageable pageable);
     Page<Question> findAllByOrderByIdDesc(Pageable pageable);
     List<Question> findAllByOrderByIdDesc();
     Question findBySubject(String subject);

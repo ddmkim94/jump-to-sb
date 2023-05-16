@@ -25,7 +25,7 @@ public class QuestionService {
         sorts.add(Sort.Order.desc("id"));
 
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        return questionRepository.findDistinctBySubjectContainsOrContentContainsOrAuthor_UsernameOrAnswerList_ContentContains(kw, kw, kw, kw, pageable);
+        return questionRepository.findDistinctBySubjectContainsOrContentContainsOrAuthor_UsernameOrAnswerList_ContentContainsOrAnswerList_Author_Username(kw, kw, kw, kw, kw, pageable);
     }
 
     public List<Question> getList() {
